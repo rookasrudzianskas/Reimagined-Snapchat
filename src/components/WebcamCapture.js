@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import Webcam from "react-webcam";
 import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 
@@ -12,6 +12,7 @@ const videoConstrains = {
 const WebcamCapture = () => {
     // pointing to the camera
     const webcamRef = useRef(null);
+    const [image, setImage] = useState(null);
 
     // use callback is clever function it does the same, then is fired for the first time, and after that, then fired next times, it just
     // uses the same answer as from the first rerender
@@ -19,7 +20,9 @@ const WebcamCapture = () => {
         // then webcamRef changes, it runs
         // this gets screenshot
         const imageSrc = webcamRef.current.getScreenshot();
-        console.log(imageSrc)
+        // console.log(imageSrc) base 64 image
+        setImage(imageSrc);
+
     }, [webcamRef]);
 
 
@@ -28,6 +31,8 @@ const WebcamCapture = () => {
             <Webcam screenshotFormat="image/jpeg" audio={false} height={videoConstrains.height} ref={webcamRef} width={videoConstrains.width} videoConstraints={videoConstrains} />
 
             <RadioButtonUnchecked className="webcamCapture__button" onClick={capture} fontSize={"large"} />
+
+            <img src={image} alt=""/>
         </div>
     );
 };
