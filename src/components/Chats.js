@@ -16,6 +16,10 @@ const Chats = () => {
 
                 <ChatBubble  className="chats__chatIcon" />
             </div>
+
+            <div className="chat__posts">
+
+            </div>
         </div>
     );
 };
