@@ -4,6 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {resetCameraImage, selectCameraImage} from "../features/cameraSlice";
 import { useHistory } from "react-router-dom";
 import { Close, AttachFile, Create, Crop, MusicNote, Note, Timer, TextFields, Send } from '@material-ui/icons';
+import { v4 as uuid} from "uuid";
+import firebase from "firebase";
+import {storage} from "../firebase";
+import db from "../firebase";
 
 const Preview = () => {
 
@@ -27,6 +31,29 @@ const Preview = () => {
         history.replace("/");
     };
 
+    const sendPost = () => {
+        const id = uuid();
+        // importing images to the firebase storage
+        // finds the url with ref, and puts under te post, under the id, in beautifully formatted
+        // here it uploads to the firebase storage
+        const uploadTask = storage.ref(`posts/${id}`).putString(cameraImage, 'data_url');
+
+        // then it uploads, the state is changed
+        uploadTask.on('state_changed', null, (error => alert(error)), () => {
+            // on complete function, then upload completes this one fires on
+           storage.ref('posts').child(id).getDownloadURL().then((url) => {
+               db.collection('posts').add({
+                   imageUrl: url,
+                   username: "Rokas",
+                   read: false,
+                   // profilePic
+                   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+               });
+               // after all pushes to the chats
+               history.replace("/chats");
+           });
+        });
+    };
 
     return (
         <div className="preview">
@@ -41,6 +68,10 @@ const Preview = () => {
                 <Timer />
             </div>
             <img src={cameraImage} alt=""/>
+            <div onClick={sendPost} className="preview__footer">
+                <h2>Send Now</h2>
+                <Send className="preview__sendIcon" />
+            </div>
         </div>
     );
 };
