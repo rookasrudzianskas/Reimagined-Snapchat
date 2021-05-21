@@ -32,7 +32,6 @@ const WebcamCapture = () => {
 
             <RadioButtonUnchecked className="webcamCapture__button" onClick={capture} fontSize={"large"} />
 
-            <img src={image} alt=""/>
         </div>
     );
 };
