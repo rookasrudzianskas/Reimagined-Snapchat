@@ -8,10 +8,12 @@ import { v4 as uuid} from "uuid";
 import firebase from "firebase";
 import {storage} from "../firebase";
 import db from "../firebase";
+import {selectUser} from "../features/appSlice";
 
 const Preview = () => {
 
     const dispatch = useDispatch();
+    const user = useSelector(selectUser);
     // will pull camera image from data layer
     const cameraImage = useSelector(selectCameraImage);
     const history = useHistory();
@@ -48,7 +50,7 @@ const Preview = () => {
                    imageUrl: url,
                    username: "Rokas",
                    read: false,
-                   // profilePic
+                   profilePic: user.profilePic,
                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                });
                // after all pushes to the chats
