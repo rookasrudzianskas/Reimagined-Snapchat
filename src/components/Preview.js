@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import "./styles/Preview.css";
 import {useDispatch, useSelector} from "react-redux";
-import {selectCameraImage} from "../features/cameraSlice";
-import { useHistory } from "react-router-dom"
+import {resetCameraImage, selectCameraImage} from "../features/cameraSlice";
+import { useHistory } from "react-router-dom";
+import { Close, AttachFile, Create, Crop, MusicNote, Note, Timer, TextFields, Send } from '@material-ui/icons';
+
 const Preview = () => {
 
     const dispatch = useDispatch();
@@ -17,8 +19,18 @@ const Preview = () => {
             // works, redirects if there is no image, dependent to the camera image and history, variables from outside
         }
     }, [cameraImage, history]);
+
+    const closePreview = () => {
+        // resets the camera in the reducer, to null
+        dispatch(resetCameraImage());
+        // and replaces it straight to the camera home page
+        history.replace("/");
+    };
+
+
     return (
         <div className="preview">
+            <Close className="preview__close" onClick={closePreview}/>
             <img src={cameraImage} alt=""/>
         </div>
     );
