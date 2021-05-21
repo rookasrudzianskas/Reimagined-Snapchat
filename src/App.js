@@ -7,6 +7,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import Prieview from "./components/Preview";
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
         <Router>
             <div className="app__body">
                 <Switch>
-                    <Route path="/test">
-                        <h1>This is test</h1>
+                    <Route path="/preview">
+                        <Prieview />
                     </Route>
                     <Route exact path="/">
                         <WebcamCapture />
