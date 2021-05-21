@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import "./styles/Chats.css";
 import {Avatar} from "@material-ui/core";
-import { ChatBubble, Search } from '@material-ui/icons';
+import { ChatBubble, Search} from '@material-ui/icons';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import db from "../firebase";
+import Chat from "./Chat";
 
 const Chats = () => {
 
-    const [posts, setPosts] = useState();
+    const [posts, setPosts] = useState([]);
     console.log(posts);
     useEffect(() => {
         // then db changes, it automatically updates the post
@@ -31,7 +32,17 @@ const Chats = () => {
             </div>
 
             <div className="chats__posts">
-                <h2>Hello</h2>
+                {posts.map(({ id, data: { profilePic, username, timestamp, imageUrl, read } }) => (
+                    <Chat
+                        key={id}
+                        id={id}
+                        username={username}
+                        timestamp={timestamp}
+                        imageUrl={imageUrl}
+                        read={read}
+                        profilePic={profilePic}
+                    />
+                ))}
             </div>
         </div>
     );
