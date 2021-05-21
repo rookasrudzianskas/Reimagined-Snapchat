@@ -7,13 +7,16 @@ export const appSlice = createSlice({
     selectedImage: null,
   },
   reducers: {
+    // login, to dispatch the login info
     login: (state, action) => {
       state.user = action.payload;
     },
-
+  // logout
     logout: (state) => {
       state.user = null
     },
+
+    // selectImage, to tap on the image we are hovering on, to showw the preview
     selectImage: (state, action) => {
       state.selectedImage = action.payload;
     },
