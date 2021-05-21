@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import Webcam from "react-webcam";
 
+// video camera settings
 const videoConstrains = {
     width: 250,
     height: 400,
