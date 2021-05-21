@@ -8,7 +8,7 @@ import {selectImage} from "../features/appSlice";
 import db from "../firebase";
 import {useHistory} from "react-router-dom";
 
-const Chat = ({profilePic, id, username, imageUrl, timestamp, read, key}) => {
+const Chat = ({profilePic, id, username, imageUrl, timestamp, read}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
