@@ -8,6 +8,7 @@ import {
     Link
 } from "react-router-dom";
 import Prieview from "./components/Preview";
+import Chats from "./components/Chats";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         <Router>
             <div className="app__body">
                 <Switch>
+                    <Route path="/chats">
+                        <Chats />
+                    </Route>
                     <Route path="/preview">
                         <Prieview />
                     </Route>

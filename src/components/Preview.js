@@ -39,8 +39,10 @@ const Preview = () => {
         const uploadTask = storage.ref(`posts/${id}`).putString(cameraImage, 'data_url');
 
         // then it uploads, the state is changed
+        // it uploads all the info to the firestore database
         uploadTask.on('state_changed', null, (error => alert(error)), () => {
             // on complete function, then upload completes this one fires on
+            // it gets image download url, and also puts all other things in here
            storage.ref('posts').child(id).getDownloadURL().then((url) => {
                db.collection('posts').add({
                    imageUrl: url,
