@@ -31,6 +31,15 @@ const Preview = () => {
     return (
         <div className="preview">
             <Close className="preview__close" onClick={closePreview}/>
+            <div className="preview__toolbarRight">
+                <TextFields />
+                <Create />
+                <Note />
+                <MusicNote />
+                <AttachFile />
+                <Crop />
+                <Timer />
+            </div>
             <img src={cameraImage} alt=""/>
         </div>
     );
